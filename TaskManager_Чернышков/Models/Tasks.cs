@@ -4,9 +4,10 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using Schema = System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace TaskManager_Чернышков.Models
 {
-    internal class Tasks : Notification
+    public class Tasks : Notification
     {
         public int Id { get; set; }
 

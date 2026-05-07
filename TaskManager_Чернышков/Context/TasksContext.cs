@@ -7,10 +7,10 @@ namespace TaskManager_Чернышков.Context
     {
         public DbSet<Task> Tasks { get; set; }
 
-        public TaskContext()
+        public TasksContext()
         {
             Database.EnsureCreated();
-            Task.Load();
+            Tasks.Load();
 
         }
 
