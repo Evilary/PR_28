@@ -11,7 +11,7 @@ namespace TaskManager_Чернышков.Models
     {
         public int Id { get; set; }
 
-        private string name;
+        private string name = string.Empty;
 
         public string Name
         {
@@ -30,7 +30,7 @@ namespace TaskManager_Чернышков.Models
             }
         }
 
-        private string priority;
+        private string priority = string.Empty;
 
         public string Priority
         {
@@ -68,7 +68,7 @@ namespace TaskManager_Чернышков.Models
             }
         }
 
-        private string comment;
+        private string comment = string.Empty;
 
         public string Comment
         {
@@ -106,7 +106,7 @@ namespace TaskManager_Чернышков.Models
         [Schema.NotMapped]
         public bool IsEnable
         {
-            get { return IsEnable; }
+            get { return isEnable; }
             set
             {
                 isEnable = value;
@@ -145,7 +145,10 @@ namespace TaskManager_Чернышков.Models
                     IsEnable = !IsEnable;
 
                     if (!IsEnable)
-                        (MainWindow.init.DataContext as ViewModels.VM_Pages).vm_tasks.tasksContext.SaveChanges();
+                    {
+                        var vmPages = MainWindow.init?.DataContext as ViewModels.VM_Pages;
+                        vmPages?.vm_tasks.tasksContext.SaveChanges();
+                    }
                 });
             }
         }
@@ -158,12 +161,14 @@ namespace TaskManager_Чернышков.Models
             {
                 return new RealyCommand(obj =>
                 {
+                    var vmPages = MainWindow.init?.DataContext as ViewModels.VM_Pages;
+
                     if (MessageBox.Show("Вы уверены что хотите удалить задачу?",
-                        "Предупреждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                        "Предупреждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes && vmPages != null)
                     {
-                        (MainWindow.init.DataContext as ViewModels.VM_Pages).vm_tasks.Tasks.Remove(this);
-                        (MainWindow.init.DataContext as ViewModels.VM_Pages).vm_tasks.TasksContext.Remove(this);
-                        (MainWindow.init.DataContext as ViewModels.VM_Pages).vm_tasks.TasksContext.SaveChanges();
+                        vmPages.vm_tasks.Tasks.Remove(this);
+                        vmPages.vm_tasks.tasksContext.Remove(this);
+                        vmPages.vm_tasks.tasksContext.SaveChanges();
                     }
                 });
             }

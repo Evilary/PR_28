@@ -1,16 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TaskManager_Чернышков.Classes.Database;
+using TaskManager_Чернышков.Models;
 
 namespace TaskManager_Чернышков.Context
 {
     public class TasksContext : DbContext
     {
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<Tasks> Tasks { get; set; } = null!;
 
         public TasksContext()
         {
             Database.EnsureCreated();
-            Tasks.Load();
+            Set<Tasks>().Load();
 
         }
 

@@ -8,7 +8,7 @@ namespace TaskManager_Чернышков.ViewModels
 
         public VM_Pages()
         {
-            MainWindow.init.frame.Navigate(new View.Main(vm_tasks));
+            MainWindow.init!.frame.Navigate(new View.Main(vm_tasks));
         }
 
         public RealyCommand OnClose
@@ -17,7 +17,7 @@ namespace TaskManager_Чернышков.ViewModels
             {
                 return new RealyCommand(obj =>
                 {
-                    MainWindow.init.Close();
+                    MainWindow.init!.Close();
                 });
             }
         }

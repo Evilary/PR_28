@@ -9,7 +9,7 @@ namespace TaskManager_Чернышков.Classes.Database
 {
     public class Config
     {
-        public static readonly string connection = "server=192.168.0.111;" +
+        public static readonly string connection = "server=127.0.0.1;" +
             "uid=root;" +
             "pwd=;" +
             "database = TaskManager;";
